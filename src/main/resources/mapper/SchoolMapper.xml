@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fzu.edu.cn.mapper.SchoolMapper">
+    <select id="getAllSchool" resultType="fzu.edu.cn.entity.School">
+        select * from school;
+    </select>
+    <insert id="addSchool" parameterType="fzu.edu.cn.entity.School">
+        insert into school(name,code) values (#{name},#{code});
+    </insert>
+    <delete id="delSchool" parameterType="string">
+        delete from school where code = #{code};
+    </delete>
+    <update id="editSchoolName" parameterType="string">
+        update school set name = #{newSchoolName} where code = #{code};
+    </update>
+</mapper>
