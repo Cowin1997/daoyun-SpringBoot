@@ -16,12 +16,6 @@ class DaoyunApplicationTests {
     }
     @Autowired
     private AdminMapper adminMapper;
-    @Test
-    public void TestadminService(){
-        System.out.println(this.adminMapper.getAdminByUserName("admin"));
-    //    Admin a = new Admin(null,"admin123","123456","管理员","",new Date(),"",2,true);
-     //   this.adminMapper.addAdmin(a);
-     //   this.adminMapper.changePassword("admin123","admin123");
-    }
+
 
 }
