@@ -19,7 +19,9 @@ public class SchoolController {
     @RequestMapping(value = "/getAllSchool")
     @ResponseBody
     public List<School> getAllSchool(){
+        System.out.println("getAllSchool....");
         List<School> schools = this.schoolService.getAllSchool();
+        System.out.println(schools);
         return schools;
     }
 }

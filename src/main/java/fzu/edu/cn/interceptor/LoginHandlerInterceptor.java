@@ -17,13 +17,14 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle：" + request.getRequestURI());
         HttpSession session = request.getSession(false); //如果不存在则不会产生一个session,而是返回null
-        if(session!= null) { //session不为空
-            System.out.println(session.getId());
-            return true;
-        }
-        else{
-            return false;
-        }
+//        if(session!= null) { //session不为空
+//            System.out.println(session.getId());
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+        return true;
     }
 
     @Override
