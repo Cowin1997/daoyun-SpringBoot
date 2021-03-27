@@ -6,6 +6,8 @@ public class Teacher {
     private String phone;
     private String schoolcode;
     private String majorcode;
+    private String edu;
+    private String rank;
 
     @Override
     public String toString() {
@@ -15,7 +17,35 @@ public class Teacher {
                 ", phone='" + phone + '\'' +
                 ", schoolcode='" + schoolcode + '\'' +
                 ", majorcode='" + majorcode + '\'' +
+                ", edu='" + edu + '\'' +
+                ", rank='" + rank + '\'' +
                 '}';
+    }
+
+    public Teacher(String tid, String tname, String phone, String schoolcode, String majorcode, String edu, String rank) {
+        this.tid = tid;
+        this.tname = tname;
+        this.phone = phone;
+        this.schoolcode = schoolcode;
+        this.majorcode = majorcode;
+        this.edu = edu;
+        this.rank = rank;
+    }
+
+    public String getEdu() {
+        return edu;
+    }
+
+    public void setEdu(String edu) {
+        this.edu = edu;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 
     public String getTid() {
@@ -58,13 +88,6 @@ public class Teacher {
         this.majorcode = majorcode;
     }
 
-    public Teacher(String tid, String tname, String phone, String schoolcode, String majorcode) {
-        this.tid = tid;
-        this.tname = tname;
-        this.phone = phone;
-        this.schoolcode = schoolcode;
-        this.majorcode = majorcode;
-    }
 
     public Teacher() {
     }

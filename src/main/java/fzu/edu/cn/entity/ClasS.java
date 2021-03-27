@@ -1,5 +1,8 @@
 package fzu.edu.cn.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = "handler")
 public class ClasS {
     private Integer cid;
     private String cname;
@@ -7,6 +10,15 @@ public class ClasS {
     private String site;
     private String schoolcode;
     private String majorcode;
+    private Teacher teacher;
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     public ClasS() {
     }
@@ -20,6 +32,7 @@ public class ClasS {
                 ", site='" + site + '\'' +
                 ", schoolcode='" + schoolcode + '\'' +
                 ", majorcode='" + majorcode + '\'' +
+                ", teacher=" + teacher +
                 '}';
     }
 
