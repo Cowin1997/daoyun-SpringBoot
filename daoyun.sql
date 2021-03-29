@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 26/03/2021 17:44:26
+ Date: 29/03/2021 21:32:16
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `admin`  (
   `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '管理员手机号',
   PRIMARY KEY (`id`, `account`) USING BTREE,
   UNIQUE INDEX `account`(`account`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
@@ -60,15 +60,38 @@ CREATE TABLE `class`  (
   CONSTRAINT `class_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `teacher` (`tid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `class_ibfk_3` FOREIGN KEY (`schoolcode`) REFERENCES `school` (`code`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `class_ibfk_4` FOREIGN KEY (`majorcode`) REFERENCES `major` (`majorcode`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of class
 -- ----------------------------
-INSERT INTO `class` VALUES (1, '课程1', '1', '地点1', '10384', '123');
+INSERT INTO `class` VALUES (1, '课程1', '6', '地点1', '10384', '123');
 INSERT INTO `class` VALUES (2, '课程2', '1', '地点2', '10384', '123');
 INSERT INTO `class` VALUES (3, '课程3', '1', '地点3', '10384', '123');
 INSERT INTO `class` VALUES (4, '课程4', '1', '地点4', '10384', '123');
+
+-- ----------------------------
+-- Table structure for config
+-- ----------------------------
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE `config`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config
+-- ----------------------------
+INSERT INTO `config` VALUES (1, '学历', '硕士', NULL);
+INSERT INTO `config` VALUES (2, '学历', '博士', NULL);
+INSERT INTO `config` VALUES (3, '学历', '本科', NULL);
+INSERT INTO `config` VALUES (4, '学历', '大专', NULL);
+INSERT INTO `config` VALUES (5, '职称', '副教授', NULL);
+INSERT INTO `config` VALUES (6, '职称', '教师', NULL);
+INSERT INTO `config` VALUES (7, '职称', '院士', NULL);
 
 -- ----------------------------
 -- Table structure for courseselect
@@ -79,16 +102,15 @@ CREATE TABLE `courseselect`  (
   `classid` int NOT NULL,
   `sid` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `sid`(`sid`) USING BTREE,
   INDEX `classid`(`classid`) USING BTREE,
+  INDEX `sid`(`sid`) USING BTREE,
   CONSTRAINT `courseselect_ibfk_1` FOREIGN KEY (`classid`) REFERENCES `class` (`cid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `courseselect_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `student` (`sid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of courseselect
 -- ----------------------------
-INSERT INTO `courseselect` VALUES (1, 1, '123');
 INSERT INTO `courseselect` VALUES (2, 1, '124');
 INSERT INTO `courseselect` VALUES (3, 1, '125');
 INSERT INTO `courseselect` VALUES (5, 1, '126');
@@ -104,7 +126,6 @@ INSERT INTO `courseselect` VALUES (14, 1, '135');
 INSERT INTO `courseselect` VALUES (15, 1, '136');
 INSERT INTO `courseselect` VALUES (16, 1, '137');
 INSERT INTO `courseselect` VALUES (17, 1, '138');
-INSERT INTO `courseselect` VALUES (18, 1, '139');
 
 -- ----------------------------
 -- Table structure for department
@@ -164,7 +185,7 @@ CREATE TABLE `major`  (
   INDEX `学校代码`(`schoolcode`) USING BTREE,
   INDEX `majorcode`(`majorcode`) USING BTREE,
   CONSTRAINT `学校代码` FOREIGN KEY (`schoolcode`) REFERENCES `school` (`code`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of major
@@ -185,7 +206,7 @@ CREATE TABLE `menu`  (
   `admin` bit(1) NULL DEFAULT NULL,
   `superadmin` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
@@ -194,6 +215,8 @@ INSERT INTO `menu` VALUES (1, 'iconfont icon-wode', 'index', '系统首页', b'1
 INSERT INTO `menu` VALUES (2, 'iconfont icon-all', 'student', '学生管理', b'1', b'1');
 INSERT INTO `menu` VALUES (3, 'iconfont icon-Customermanagement-fill', 'admin', '管理员管理', b'0', b'1');
 INSERT INTO `menu` VALUES (4, 'iconfont icon-office-supplies', 'class', '班级管理', b'1', b'1');
+INSERT INTO `menu` VALUES (5, 'iconfont icon-office-supplies', 'teacher', '教师管理', b'1', b'1');
+INSERT INTO `menu` VALUES (6, 'iconfont icon-wode', 'data', '数据字典', b'1', b'1');
 
 -- ----------------------------
 -- Table structure for school
@@ -275,6 +298,8 @@ CREATE TABLE `teacher`  (
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `schoolcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `majorcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `edu` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `rank` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`tid`) USING BTREE,
   INDEX `schoolcode`(`schoolcode`) USING BTREE,
   INDEX `majorcode`(`majorcode`) USING BTREE,
@@ -285,11 +310,11 @@ CREATE TABLE `teacher`  (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('1', '老师1', '12345678901', '10384', '123');
-INSERT INTO `teacher` VALUES ('2', '老师2', '13015959118', '10384', '123');
-INSERT INTO `teacher` VALUES ('3', '老师3', '13015959117', '10384', '123');
-INSERT INTO `teacher` VALUES ('4', '老师4', '13015959104', '10384', '123');
-INSERT INTO `teacher` VALUES ('5', '老师5', '13015959105', '10384', '123');
-INSERT INTO `teacher` VALUES ('6', '老师6', '13015959106', '10384', '123');
+INSERT INTO `teacher` VALUES ('1', '老师1', '12345678901', '10384', '123', '硕士研究生', '讲师');
+INSERT INTO `teacher` VALUES ('2', '老师2', '13015959118', '10384', '123', '硕士研究生', '副教授');
+INSERT INTO `teacher` VALUES ('3', '老师3', '13015959117', '10384', '123', '硕士研究生', '教授');
+INSERT INTO `teacher` VALUES ('4', '老师4', '13015959104', '10384', '123', '博士研究生', '助教');
+INSERT INTO `teacher` VALUES ('5', '老师5', '13015959105', '10384', '123', '博士研究生', '助理研究员');
+INSERT INTO `teacher` VALUES ('6', '老师6', '13015959106', '10384', '123', '博士研究生', '副教授');
 
 SET FOREIGN_KEY_CHECKS = 1;
